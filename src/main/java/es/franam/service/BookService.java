@@ -41,7 +41,7 @@ public class BookService {
 		}
 	}
 	
-	public void editBook(Book book) {
+	public void editBook(Long id) {
 		
 	}
 }
