@@ -2,10 +2,22 @@ package es.franam.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
+
+
+@Entity
 public class Author implements Serializable {
 	
+	@Length(max = 30)
+	@NotBlank
 	private String name;
 	
+	@Length(max = 30)
+	@NotBlank
 	private String surname;
 
 	public Author() {
