@@ -1,69 +1,132 @@
 package es.franam.domain;
 
+import static javax.persistence.GenerationType.SEQUENCE;
+
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-public class Book implements Serializable{
-	
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.ISBN;
+import org.hibernate.validator.constraints.Length;
+import org.springframework.data.annotation.CreatedDate;
+
+@Entity
+public class Book implements Serializable {
+
+	@Id
+	@GeneratedValue(strategy = SEQUENCE, generator = "BOOK_ID_SEQ")
+	private int id;
+
+	@Length(min = 2, max = 30)
+	@NotBlank
 	private String title;
+
+	@Length(min = 2, max = 30)
+	@NotBlank
+	@ISBN
 	private String ISBN;
+
+	@Min(1)
 	private double price;
-	private Author author;
+
+	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+	@OrderBy("name asc, id desc")
+	private Set<Author> authors = new HashSet<>();
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@CreatedDate
 	private Date publishedDate;
+
+	@Length(min = 2, max = 30)
+	@NotBlank
 	private String editorial;
-	
-	
-	
+
 	public Book() {
-		
+
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getISBN() {
 		return ISBN;
 	}
+
 	public void setISBN(String iSBN) {
 		ISBN = iSBN;
 	}
+
 	public double getPrice() {
 		return price;
 	}
+
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public Author getAuthor() {
-		return author;
+
+	public Set<Author> getAuthors() {
+		return authors;
 	}
-	public void setAuthor(Author author) {
-		this.author = author;
+
+	public void setAuthors(Set<Author> authors) {
+		this.authors = authors;
 	}
+
 	public Date getPublishedDate() {
 		return publishedDate;
 	}
+
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
 	}
+
 	public String getEditorial() {
 		return editorial;
 	}
+
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
 	}
+
 	@Override
 	public String toString() {
-		return "Book [title=" + title + ", ISBN=" + ISBN + ", price=" + price + ", publishedDate=" + publishedDate
-				+ ", editorial=" + editorial + "]";
+		return "Book [id=" + id + ", title=" + title + ", ISBN=" + ISBN + ", price=" + price + ", authors=" + authors
+				+ ", publishedDate=" + publishedDate + ", editorial=" + editorial + "]";
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ISBN == null) ? 0 : ISBN.hashCode());
+		result = prime * result + ((authors == null) ? 0 : authors.hashCode());
 		result = prime * result + ((editorial == null) ? 0 : editorial.hashCode());
+		result = prime * result + id;
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
@@ -71,6 +134,7 @@ public class Book implements Serializable{
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -85,10 +149,17 @@ public class Book implements Serializable{
 				return false;
 		} else if (!ISBN.equals(other.ISBN))
 			return false;
+		if (authors == null) {
+			if (other.authors != null)
+				return false;
+		} else if (!authors.equals(other.authors))
+			return false;
 		if (editorial == null) {
 			if (other.editorial != null)
 				return false;
 		} else if (!editorial.equals(other.editorial))
+			return false;
+		if (id != other.id)
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
@@ -104,7 +175,5 @@ public class Book implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
+
 }
