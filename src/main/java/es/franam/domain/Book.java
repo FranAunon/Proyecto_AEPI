@@ -30,7 +30,9 @@ public class Book implements Serializable {
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "BOOK_ID_SEQ")
 	private int id;
-
+	
+	private Long version;
+	
 	@Length(min = 2, max = 30)
 	@NotBlank
 	private String title;

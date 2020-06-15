@@ -22,6 +22,8 @@ public class Author implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private int id;
+	
+	private Long version;
 
 	@Length(min = 2, max = 30)
 	@NotBlank
