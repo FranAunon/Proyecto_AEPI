@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
@@ -22,7 +23,8 @@ public class Author implements Serializable {
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
 	private int id;
-	
+
+	@Version
 	private Long version;
 
 	@Length(min = 2, max = 30)
@@ -32,7 +34,7 @@ public class Author implements Serializable {
 	@Length(min = 2, max = 30)
 	@NotBlank
 	private String surname;
-	
+
 	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "book_id", nullable = false)
@@ -41,32 +43,22 @@ public class Author implements Serializable {
 	public Author() {
 
 	}
-	
-	
 
 	public int getId() {
 		return id;
 	}
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
 
 	public Book getBook() {
 		return book;
 	}
 
-
-
 	public void setBook(Book book) {
 		this.book = book;
 	}
-
-
 
 	public String getName() {
 		return name;
@@ -84,13 +76,17 @@ public class Author implements Serializable {
 		this.surname = surname;
 	}
 
+	public Long getVersion() {
+		return version;
+	}
 
+	public void setVersion(Long version) {
+		this.version = version;
+	}
 
 	@Override
 	public String toString() {
 		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", book=" + book + "]";
 	}
-
-	
 
 }

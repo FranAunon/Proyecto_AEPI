@@ -16,6 +16,7 @@ import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Version;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
@@ -30,9 +31,10 @@ public class Book implements Serializable {
 	@Id
 	@GeneratedValue(strategy = SEQUENCE, generator = "BOOK_ID_SEQ")
 	private int id;
-	
+
+	@Version
 	private Long version;
-	
+
 	@Length(min = 2, max = 30)
 	@NotBlank
 	private String title;
@@ -115,6 +117,15 @@ public class Book implements Serializable {
 
 	public void setEditorial(String editorial) {
 		this.editorial = editorial;
+	}
+	
+
+	public Long getVersion() {
+		return version;
+	}
+
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 	@Override
