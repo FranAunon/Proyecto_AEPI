@@ -58,6 +58,8 @@ public class Book implements Serializable {
 	@Length(min = 2, max = 30)
 	@NotBlank
 	private String editorial;
+	
+	private String imagen="no-image.png";
 
 	public Book() {
 
@@ -126,6 +128,15 @@ public class Book implements Serializable {
 
 	public void setVersion(Long version) {
 		this.version = version;
+	}
+	
+
+	public String getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	@Override
