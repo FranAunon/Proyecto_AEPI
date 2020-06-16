@@ -23,11 +23,10 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String showHome(Model model) {
 		
-		List<Book> books= bookService.findAllBooks();
-		model.addAttribute("books", books);
+		
 		return "home";
 	}
 	

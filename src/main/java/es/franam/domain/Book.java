@@ -47,9 +47,9 @@ public class Book implements Serializable {
 	@Min(1)
 	private double price;
 
-	@OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
-	@OrderBy("name asc, id desc")
-	private Set<Author> authors = new HashSet<>();
+	@Length(min = 2, max = 30)
+	@NotBlank
+	private String author;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
@@ -97,12 +97,12 @@ public class Book implements Serializable {
 		this.price = price;
 	}
 
-	public Set<Author> getAuthors() {
-		return authors;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setAuthors(Set<Author> authors) {
-		this.authors = authors;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public Date getPublishedDate() {
@@ -141,8 +141,9 @@ public class Book implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", ISBN=" + ISBN + ", price=" + price + ", authors=" + authors
-				+ ", publishedDate=" + publishedDate + ", editorial=" + editorial + "]";
+		return "Book [id=" + id + ", version=" + version + ", title=" + title + ", ISBN=" + ISBN + ", price=" + price
+				+ ", author=" + author + ", publishedDate=" + publishedDate + ", editorial=" + editorial + ", imagen="
+				+ imagen + "]";
 	}
 
 	@Override
@@ -150,14 +151,16 @@ public class Book implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ISBN == null) ? 0 : ISBN.hashCode());
-		result = prime * result + ((authors == null) ? 0 : authors.hashCode());
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((editorial == null) ? 0 : editorial.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((imagen == null) ? 0 : imagen.hashCode());
 		long temp;
 		temp = Double.doubleToLongBits(price);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((publishedDate == null) ? 0 : publishedDate.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((version == null) ? 0 : version.hashCode());
 		return result;
 	}
 
@@ -175,10 +178,10 @@ public class Book implements Serializable {
 				return false;
 		} else if (!ISBN.equals(other.ISBN))
 			return false;
-		if (authors == null) {
-			if (other.authors != null)
+		if (author == null) {
+			if (other.author != null)
 				return false;
-		} else if (!authors.equals(other.authors))
+		} else if (!author.equals(other.author))
 			return false;
 		if (editorial == null) {
 			if (other.editorial != null)
@@ -186,6 +189,11 @@ public class Book implements Serializable {
 		} else if (!editorial.equals(other.editorial))
 			return false;
 		if (id != other.id)
+			return false;
+		if (imagen == null) {
+			if (other.imagen != null)
+				return false;
+		} else if (!imagen.equals(other.imagen))
 			return false;
 		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price))
 			return false;
@@ -199,7 +207,13 @@ public class Book implements Serializable {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
+		if (version == null) {
+			if (other.version != null)
+				return false;
+		} else if (!version.equals(other.version))
+			return false;
 		return true;
 	}
 
+	
 }
