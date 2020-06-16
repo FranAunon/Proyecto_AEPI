@@ -25,8 +25,8 @@ public class BookController {
 	
 	@GetMapping("/")
 	public String showHome(Model model) {
-		
-		
+		List<Book> books = bookService.buscarTodas();
+		model.addAttribute("books", books);
 		return "home";
 	}
 	

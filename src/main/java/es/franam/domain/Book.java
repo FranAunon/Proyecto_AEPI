@@ -60,10 +60,26 @@ public class Book implements Serializable {
 	private String editorial;
 	
 	private String imagen="no-image.png";
+	
+	private int destacado;
 
 	public Book() {
 
 	}
+	
+	
+
+	public int getDestacado() {
+		return destacado;
+	}
+
+
+
+	public void setDestacado(int destacado) {
+		this.destacado = destacado;
+	}
+
+
 
 	public int getId() {
 		return id;

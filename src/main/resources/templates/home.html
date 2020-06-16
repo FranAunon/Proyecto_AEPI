@@ -74,7 +74,7 @@
           </div>
           <div class="col-md-9">
             <h2 th:text="${book.title}"></h2>
-            <h6 class="card-title"><strong>Categoría: </strong> <span>Arquitectura</span></h6>
+            <h6 class="card-title"><strong>Author: </strong> <span th:text="${book.author}"></span></h6>
             <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${book.publishedDate}"></span></h6>                
             <p th:text="${book.editorial}" ></p>
             <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>            
