@@ -23,6 +23,13 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 	
+	@GetMapping("/tabla")
+	public String showTable(Model model) {
+		List<Book> books = bookService.buscarTodas();
+		model.addAttribute("books", books);
+		return "tabla";
+	}
+	
 	@GetMapping("/")
 	public String showHome(Model model) {
 		List<Book> books = bookService.buscarTodas();
