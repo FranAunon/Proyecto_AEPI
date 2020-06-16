@@ -38,6 +38,8 @@ public class BookController {
 		return "home";
 	}
 	
+
+	
 	@GetMapping("/books/view/{id}")
 	public String verDetalle(@PathVariable("id") int id, Model model) {		
 		Book book = bookService.buscarPorId(id);	
