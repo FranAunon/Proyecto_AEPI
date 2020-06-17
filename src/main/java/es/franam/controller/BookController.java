@@ -28,6 +28,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import es.franam.domain.Book;
 import es.franam.service.BookService;
 import es.franam.service.IBookService;
+import es.franam.service.IEditorialService;
 
 @Controller
 @RequestMapping(path = "/")
@@ -35,6 +36,9 @@ public class BookController {
 
 	@Autowired
 	private IBookService bookService;
+	
+	@Autowired
+	private IEditorialService editorialesService;
 
 	@GetMapping("/tabla")
 	public String showTable(Model model) {
@@ -69,7 +73,7 @@ public class BookController {
 
 	@GetMapping("/books/create")
 	public String crear(Book book,Model model) {
-		model.addAttribute("books", bookService.buscarTodos() );
+		model.addAttribute("editoriales", editorialesService.buscarTodas() );
 		return "formBook";
 	}
 

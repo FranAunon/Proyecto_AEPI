@@ -57,7 +57,7 @@
                     <select class="form-control" th:field="*{editorial.id}">
                       <option th:each="editorial : ${editoriales}" 
 		                      th:value="${editorial.id}" 
-		                      th:text="${editorial.nombre}"></option>                     
+		                      th:text="${editorial.name}"></option>                     
                     </select>
                   </div>
                 </div>
@@ -138,7 +138,7 @@
       );
 
       tinymce.init({
-          selector: '#detalles',
+          selector: '#descripcion',
           plugins: "textcolor, table lists code",
           toolbar: " undo redo | bold italic | alignleft aligncenter alignright alignjustify \n\
                     | bullist numlist outdent indent | forecolor backcolor table code"
