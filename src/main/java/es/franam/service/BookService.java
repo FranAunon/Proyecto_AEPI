@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 
 import es.franam.domain.Book;
+import es.franam.domain.Editorial;
 import es.franam.repository.BookRepository;
 
 @Service
@@ -57,10 +58,14 @@ public class BookService implements IBookService{
 		lista = new LinkedList<Book>();
 		// Creamos libro 1.
 		Book book1 = new Book();
+		Editorial e1=new  Editorial();
+		e1.setId(1);
+		e1.setName("Anaya");
+		e1.setAddress("Almazara");
 		book1.setId(1);
 		book1.setTitle("Spring");
 		book1.setAuthor("Miguel");
-		book1.setEditorial("Anaya");
+		book1.setEditorial(e1);
 		book1.setISBN("11111");
 		book1.setPrice(20.45);
 		book1.setPublishedDate(new Date());
@@ -70,10 +75,14 @@ public class BookService implements IBookService{
 					
 		// Creamos libro 1.
 					Book book2 = new Book();
+					Editorial e2=new  Editorial();
+					e2.setId(2);
+					e2.setName("Anaya2");
+					e2.setAddress("Almazara2");
 					book2.setId(1);
 					book2.setTitle("Spring");
 					book2.setAuthor("Miguel");
-					book2.setEditorial("Anaya");
+					book2.setEditorial(e2);
 					book2.setISBN("11111");
 					book2.setPrice(20.45);
 					book2.setPublishedDate(new Date());
@@ -83,10 +92,14 @@ public class BookService implements IBookService{
 					
 					// Creamos libro 1.
 					Book book3 = new Book();
+					Editorial e3=new  Editorial();
+					e3.setId(3);
+					e3.setName("Anaya3");
+					e3.setAddress("Almazara3");
 					book3.setId(1);
 					book3.setTitle("Spring");
 					book3.setAuthor("Miguel");
-					book3.setEditorial("Anaya");
+					book3.setEditorial(e3);
 					book3.setISBN("11111");
 					book3.setPrice(20.45);
 					book3.setPublishedDate(new Date());
@@ -95,10 +108,14 @@ public class BookService implements IBookService{
 					
 					// Creamos libro 1.
 					Book book4 = new Book();
-					book4.setId(1);
+					Editorial e4=new  Editorial();
+					e2.setId(4);
+					e2.setName("Anaya4");
+					e2.setAddress("Almazara4");
+					book4.setId(4);
 					book4.setTitle("Spring");
 					book4.setAuthor("Miguel");
-					book4.setEditorial("Anaya");
+					book4.setEditorial(e4);
 					book4.setISBN("11111");
 					book4.setPrice(20.45);
 					book4.setPublishedDate(new Date());

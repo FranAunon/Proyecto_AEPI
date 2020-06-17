@@ -17,8 +17,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "Author")
-public class Author implements Serializable {
+@Table(name = "Editorial")
+public class Editorial implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -33,14 +33,16 @@ public class Author implements Serializable {
 
 	@Length(min = 2, max = 30)
 	@NotBlank
-	private String surname;
+	private String address;
 
-	@NotNull
-	@ManyToOne
-	@JoinColumn(name = "book_id", nullable = false)
-	private Book book;
-
-	public Author() {
+	/*
+	 * @NotNull
+	 * 
+	 * @ManyToOne
+	 * 
+	 * @JoinColumn(name = "book_id", nullable = false) private Book book;
+	 */
+	public Editorial() {
 
 	}
 
@@ -52,12 +54,12 @@ public class Author implements Serializable {
 		this.id = id;
 	}
 
-	public Book getBook() {
-		return book;
+	public Long getVersion() {
+		return version;
 	}
 
-	public void setBook(Book book) {
-		this.book = book;
+	public void setVersion(Long version) {
+		this.version = version;
 	}
 
 	public String getName() {
@@ -68,25 +70,19 @@ public class Author implements Serializable {
 		this.name = name;
 	}
 
-	public String getSurname() {
-		return surname;
+	public String getAddress() {
+		return address;
 	}
 
-	public void setSurname(String surname) {
-		this.surname = surname;
-	}
-
-	public Long getVersion() {
-		return version;
-	}
-
-	public void setVersion(Long version) {
-		this.version = version;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Override
 	public String toString() {
-		return "Author [id=" + id + ", name=" + name + ", surname=" + surname + ", book=" + book + "]";
+		return "Editorial [id=" + id + ", version=" + version + ", name=" + name + ", address=" + address + "]";
 	}
+
+	
 
 }
