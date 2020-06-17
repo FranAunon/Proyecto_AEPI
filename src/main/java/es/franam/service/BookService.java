@@ -17,7 +17,7 @@ import es.franam.domain.Book;
 import es.franam.repository.BookRepository;
 
 @Service
-public class BookService {
+public class BookService implements IBookService{
 
 	private static final Logger log = LoggerFactory.getLogger(BookService.class);
 
@@ -114,10 +114,12 @@ public class BookService {
 		
 	}
 
-	public List<Book> buscarTodas() {
+	@Override
+	public List<Book> buscarTodos() {
 		return lista;
 	}
-
+	
+	@Override
 	public Book buscarPorId(Integer idVacante) {
 
 		for (Book b : lista) {
@@ -127,5 +129,14 @@ public class BookService {
 		}
 
 		return null;
+	}
+
+	
+	
+
+	@Override
+	public void guardar(Book book) {
+		lista.add(book);
+		
 	}
 }

@@ -1,16 +1,20 @@
 package es.franam.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -29,14 +33,14 @@ public class BookController {
 
 	@GetMapping("/tabla")
 	public String showTable(Model model) {
-		List<es.franam.domain.Book> books = bookService.buscarTodas();
+		List<es.franam.domain.Book> books = bookService.buscarTodos();
 		model.addAttribute("books", books);
 		return "tabla";
 	}
 
 	@GetMapping("/")
 	public String showHome(Model model) {
-		List<Book> books = bookService.buscarTodas();
+		List<Book> books = bookService.buscarTodos();
 		model.addAttribute("books", books);
 		return "home";
 	}
@@ -60,37 +64,22 @@ public class BookController {
 
 	@GetMapping("/books/create")
 	public String crear(Book book, Model model) {
-		//model.addAttribute("books", bookService.buscarTodas() );
-		System.out.println(book.getPrice());
+		
 		return "formBook";
 	}
 
-	@PostMapping("/save")
-	public String guardar(@RequestParam("title") String title, @RequestParam("ISBN") String ISBN,
-			@RequestParam("author") String author, @RequestParam("price") double price,
-			@RequestParam("editorial") String editorial, @RequestParam("destacado") int destacado,
-			@RequestParam("publishedDate") Date publishedDate) {
-		System.out.println(price);
-		return "books/listBooks";
+	@PostMapping("books/save")
+	public String guardar(Book book) {
+		bookService.guardar(book);
+		System.out.println("Book: "+book);
+		return "listBooks";
 	}
 
-	@PutMapping("/edit/{id}")
-	public String editBook(Long id, BindingResult result) {
-
-		bookService.editBook(id);
-		return "allbooks";
+	@InitBinder
+	public void initBinder(WebDataBinder webDataBinder) {
+		SimpleDateFormat simpleDateFormat= new SimpleDateFormat("dd-MM-yyyy");
+		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(simpleDateFormat, false));
 	}
 
-	@DeleteMapping("/delete/{id}")
-	public String deleteBook(Long id) {
-
-		try {
-			bookService.deleteBook(id);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return "allBooks";
-	}
 
 }
