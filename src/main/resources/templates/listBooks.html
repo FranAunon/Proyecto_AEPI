@@ -36,19 +36,19 @@
                   <th scope="col">Titulo</th>
                   <th scope="col">Autor</th>
                   <th scope="col">ISBN</th>                  
-         <!--          <th scope="col">Fecha Pub.</th> -->
+                  <th scope="col">Fecha Pub.</th> 
                   <th scope="col">Precio</th>
                   <th scope="col">Destacada</th>
                   <th scope="col">Editorial</th>
+                  <th scope="col">Operaciones</th>
                 </tr>
               </thead>
               <tbody>
                 <tr th:each="book : ${books}">
-                  <td></td>
                   <td th:text="${book.title}"></td>
-                  <td th:text="${book.autor}"></td>
+                  <td th:text="${book.author}"></td>
                   <td th:text="${book.ISBN}"></td>                  
-<!--                   <td th:text="${book.publishedDate}"></td> -->
+                  <td th:text="${book.publishedDate}"></td> 
                   <td th:text="${book.price}"></td>
                   <td th:text="${book.destacado==1 ? 'SI' : 'NO' }"></td>
                   <td th:text="${book.editorial}"></td>

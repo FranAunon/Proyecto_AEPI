@@ -11,6 +11,7 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,13 +24,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.franam.domain.Book;
 import es.franam.service.BookService;
+import es.franam.service.IBookService;
 
 @Controller
 @RequestMapping(path = "/")
 public class BookController {
 
 	@Autowired
-	private BookService bookService;
+	private IBookService bookService;
 
 	@GetMapping("/tabla")
 	public String showTable(Model model) {
@@ -44,6 +46,13 @@ public class BookController {
 		model.addAttribute("books", books);
 		return "home";
 	}
+	
+	@GetMapping("books/index")
+	public String mostrarIndex(Model model) {
+		List<Book> books = bookService.buscarTodos();
+    	model.addAttribute("books", books);
+		return "listBooks";
+	}
 
 	@GetMapping("/books/view/{id}")
 	public String verDetalle(@PathVariable("id") int id, Model model) {
@@ -54,24 +63,24 @@ public class BookController {
 		return "detalle";
 	}
 
-	@GetMapping({ "/book", "/book/list" })
-	public String allBooks(Model model) {
-
-		List<Book> books = bookService.findAllBooks();
-		model.addAttribute("books", books);
-		return "allBooks";
-	}
-
 	@GetMapping("/books/create")
-	public String crear(Book book, Model model) {
-		
+	public String crear(Book book,Model model) {
+		model.addAttribute("books", bookService.buscarTodos() );
 		return "formBook";
 	}
 
-	@PostMapping("books/save")
-	public String guardar(Book book) {
+	@PostMapping("/books/save")
+	public String guardar(Book book, BindingResult result) {
+		if(result.hasErrors()) {
+			for(ObjectError error: result.getAllErrors()) {
+				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
+			}
+			return"formBook";
+		}
+		
 		bookService.guardar(book);
 		System.out.println("Book: "+book);
+		
 		return "listBooks";
 	}
 
