@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+
+
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.franam.domain.Book;
 import es.franam.service.BookService;
@@ -47,9 +50,10 @@ public class BookController {
 		return "home";
 	}
 	
-	@GetMapping("books/index")
+	@GetMapping("/books/index")
 	public String mostrarIndex(Model model) {
-		List<Book> books = bookService.buscarTodos();
+		List<Book> books
+		= bookService.buscarTodos();
     	model.addAttribute("books", books);
 		return "listBooks";
 	}
@@ -70,7 +74,7 @@ public class BookController {
 	}
 
 	@PostMapping("/books/save")
-	public String guardar(Book book, BindingResult result) {
+	public String guardar(Book book, BindingResult result, RedirectAttributes attributes ) {
 		if(result.hasErrors()) {
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
@@ -79,9 +83,11 @@ public class BookController {
 		}
 		
 		bookService.guardar(book);
+		attributes.addFlashAttribute("msg", "Registro guardado");
+		
 		System.out.println("Book: "+book);
 		
-		return "listBooks";
+		return "redirect:/books/index";
 	}
 
 	@InitBinder
