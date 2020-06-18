@@ -31,7 +31,7 @@ public class Editorial implements Serializable {
 	@NotBlank
 	private String name;
 
-	@Length(min = 2, max = 30)
+	@Length(min = 2, max = 50)
 	@NotBlank
 	private String address;
 

@@ -11,7 +11,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,6 +21,7 @@ import javax.persistence.TemporalType;
 import javax.persistence.Version;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.Length;
@@ -55,13 +58,16 @@ public class Book implements Serializable {
 	@CreatedDate
 	private Date publishedDate;
 
-	
+	@OneToOne
+	@JoinColumn(name = "idEditorial")
 	private Editorial editorial;
 	
 	private String imagen="no-image.png";
 	
+	@NotNull
 	private int destacado;
 	
+	@NotBlank
 	private String descripcion;
 
 	public Book() {
