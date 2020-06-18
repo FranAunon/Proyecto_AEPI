@@ -11,4 +11,6 @@ import es.franam.domain.Book;
 public interface BookRepository extends JpaRepository<Book, Long> {
 
 	List<Book> findAllByTitle(String title);
+	
+	
 }
