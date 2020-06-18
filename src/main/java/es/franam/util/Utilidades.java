@@ -10,6 +10,7 @@ public class Utilidades {
 	public static String guardarArchivo(MultipartFile multiPart, String ruta) {  
 		// Obtenemos el nombre original del archivo.
 		String nombreOriginal = multiPart.getOriginalFilename();
+		nombreOriginal.replace("", "-");
 		nombreOriginal = nombreOriginal.replace(" ", "-");
 		String nombreFinal = randomAlphaNumeric(8) + nombreOriginal;
 		try {
