@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,38 +34,31 @@ import es.franam.service.IEditorialService;
 import es.franam.util.Utilidades;
 
 @Controller
-@RequestMapping(path = "/")
+@RequestMapping(path = "/books")
 public class BookController {
-
+	
+	@Value("${proyecto_AEPI.ruta.imagenes}")
+	private String ruta;
+	
 	@Autowired
 	private IBookService bookService;
 	
 	@Autowired
 	private IEditorialService editorialesService;
 
-	@GetMapping("/tabla")
-	public String showTable(Model model) {
-		List<es.franam.domain.Book> books = bookService.buscarTodos();
-		model.addAttribute("books", books);
-		return "tabla";
-	}
-
-	@GetMapping("/")
-	public String showHome(Model model) {
-		List<Book> books = bookService.buscarTodos();
-		model.addAttribute("books", books);
-		return "home";
-	}
 	
-	@GetMapping("/books/index")
+
+	
+	
+	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
 		List<Book> books
 		= bookService.buscarTodos();
     	model.addAttribute("books", books);
-		return "listBooks";
+		return "books/listBooks";
 	}
 
-	@GetMapping("/books/view/{id}")
+	@GetMapping("/view/{id}")
 	public String verDetalle(@PathVariable("id") int id, Model model) {
 		Book book = bookService.buscarPorId(id);
 		System.out.println("Book: " + book);
@@ -73,24 +67,24 @@ public class BookController {
 		return "detalle";
 	}
 
-	@GetMapping("/books/create")
+	@GetMapping("/create")
 	public String crear(Book book,Model model) {
 		model.addAttribute("editoriales", editorialesService.buscarTodas() );
-		return "formBook";
+		return "books/formBook";
 	}
 
-	@PostMapping("/books/save")
+	@PostMapping("/save")
 	public String guardar(Book book, BindingResult result, RedirectAttributes attributes,@RequestParam("archivoImagen") MultipartFile multiPart ) {
 		if(result.hasErrors()) {
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
 			}
-			return"formBook";
+			return"books/formBook";
 		}
 		
 		if (!multiPart.isEmpty()) {
 			
-			String ruta = "c:/libros/img-libros/"; 
+			//String ruta = "c:/libros/img-libros/"; 
 			String nombreImagen = Utilidades.guardarArchivo(multiPart, ruta);
 			if (nombreImagen != null){ // La imagen si se subio
 				// Procesamos la variable nombreImagen

@@ -27,7 +27,7 @@
       <div class="jumbotron">
         <div class="container">
           <h3>Encuentra el libro que estas buscando.</h3>
-          Puedes buscar por Editorial y Autor.
+          Puedes buscar por descripción y categoría.
           <form class="form-inline">
             <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
             <select class="custom-select custom-select mb-3">
@@ -53,9 +53,9 @@
           </div>
           <div class="col-md-9">
             <h2 th:text="${book.title}"></h2>
-            <h6 class="card-title"><strong>Author: </strong> <span th:text="${book.author}"></span></h6>
+            <h6 class="card-title"><strong>Autor: </strong> <span th:text="${book.author}"></span></h6>
             <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${book.publishedDate}"></span></h6>                
-            <p th:text="${book.editorial}" ></p>
+            <p th:text="${book.editorial.name}" ></p>
             <p><a class="btn btn-secondary" TH:href="@{/books/view/{id} (id=${book.id})  }" role="button">Detalles &raquo;</a></p>            
           </div>
         </div>  
