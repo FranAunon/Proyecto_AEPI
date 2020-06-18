@@ -23,12 +23,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.franam.domain.Book;
 import es.franam.service.BookService;
 import es.franam.service.IBookService;
 import es.franam.service.IEditorialService;
+import es.franam.util.Utilidades;
 
 @Controller
 @RequestMapping(path = "/")
@@ -78,12 +80,22 @@ public class BookController {
 	}
 
 	@PostMapping("/books/save")
-	public String guardar(Book book, BindingResult result, RedirectAttributes attributes ) {
+	public String guardar(Book book, BindingResult result, RedirectAttributes attributes,@RequestParam("archivoImagen") MultipartFile multiPart ) {
 		if(result.hasErrors()) {
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
 			}
 			return"formBook";
+		}
+		
+		if (!multiPart.isEmpty()) {
+			
+			String ruta = "c:/libros/img-libros/"; 
+			String nombreImagen = Utilidades.guardarArchivo(multiPart, ruta);
+			if (nombreImagen != null){ // La imagen si se subio
+				// Procesamos la variable nombreImagen
+				book.setImagen(nombreImagen);
+			}
 		}
 		
 		bookService.guardar(book);
