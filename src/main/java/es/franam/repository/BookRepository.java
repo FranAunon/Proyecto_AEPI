@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import es.franam.domain.Book;
 
 @Repository
-public interface BookRepository extends JpaRepository<Book, Long> {
+public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> findAllByTitle(String title);
 	

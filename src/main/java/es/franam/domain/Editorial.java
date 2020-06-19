@@ -1,40 +1,49 @@
 package es.franam.domain;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static javax.persistence.GenerationType.SEQUENCE;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 import javax.persistence.Version;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "Editorial")
+@Table(name = "editorial")
 public class Editorial implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
-	private int id;
+	@GeneratedValue(strategy = SEQUENCE, generator = "EDITORIAL_ID_SEQ")
+	private Integer id;
 
 	@Version
 	private Long version;
 
 	@Length(min = 2, max = 30)
-	@NotBlank
 	private String name;
 
 	@Length(min = 2, max = 50)
-	@NotBlank
 	private String address;
 
+	@OneToMany(mappedBy = "editorial")
+	@OrderBy("date asc, id desc")
+	Set<Book> books = new HashSet<>();
+
+	/*
+	 * @OneToOne
+	 * 
+	 * @MapsId private Book book;
+	 */
 	/*
 	 * @NotNull
 	 * 
@@ -42,15 +51,26 @@ public class Editorial implements Serializable {
 	 * 
 	 * @JoinColumn(name = "book_id", nullable = false) private Book book;
 	 */
-	public Editorial() {
 
-	}
-
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	
+
+	public Set<Book> getBooks() {
+		return books;
+	}
+
+
+
+	public void setBooks(Set<Book> books) {
+		this.books = books;
+	}
+
+
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -78,9 +98,12 @@ public class Editorial implements Serializable {
 		this.address = address;
 	}
 
+
+
 	@Override
 	public String toString() {
-		return "Editorial [id=" + id + ", version=" + version + ", name=" + name + ", address=" + address + "]";
+		return "Editorial [id=" + id + ", version=" + version + ", name=" + name + ", address=" + address + ", books="
+				+ books + "]";
 	}
 
 	

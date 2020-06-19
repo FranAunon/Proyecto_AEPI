@@ -5,9 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-
-
-import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -16,19 +13,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import es.franam.domain.Book;
-import es.franam.service.BookService;
 import es.franam.service.IBookService;
 import es.franam.service.IEditorialService;
 import es.franam.util.Utilidades;
@@ -46,9 +40,6 @@ public class BookController {
 	@Autowired
 	private IEditorialService editorialesService;
 
-	
-
-	
 	
 	@GetMapping("/index")
 	public String mostrarIndex(Model model) {
@@ -70,11 +61,14 @@ public class BookController {
 	@GetMapping("/create")
 	public String crear(Book book,Model model) {
 		model.addAttribute("editoriales", editorialesService.buscarTodas() );
+		System.out.println("pasa");
 		return "books/formBook";
 	}
 
 	@PostMapping("/save")
 	public String guardar(Book book, BindingResult result, RedirectAttributes attributes,@RequestParam("archivoImagen") MultipartFile multiPart ) {
+		
+		System.out.println(book);
 		if(result.hasErrors()) {
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());

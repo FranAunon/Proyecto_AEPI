@@ -40,6 +40,7 @@ public class EditorialesController {
 		}	
 		
 		// Guadamos el objeto categoria en la bd
+		System.out.println(editorial);
 		editorialService.guardar(editorial);
 		attributes.addFlashAttribute("msg", "Los datos de la categoría fueron guardados!");		
 		return "redirect:/editoriales/index";

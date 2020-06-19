@@ -1,38 +1,33 @@
 package es.franam.domain;
 
-import static javax.persistence.GenerationType.SEQUENCE;
-
 import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.OrderBy;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import javax.persistence.Version;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.ISBN;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Table(name = "Book")
+@Table(name = "book")
 public class Book implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = SEQUENCE, generator = "BOOK_ID_SEQ")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Integer id;
 
 	@Version
@@ -44,7 +39,7 @@ public class Book implements Serializable {
 
 	@Length(min = 2, max = 30)
 	@NotBlank
-	@ISBN
+	//@ISBN
 	private String ISBN;
 
 	@Min(1)
@@ -57,10 +52,12 @@ public class Book implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	@CreatedDate
 	private Date publishedDate;
-
-	@OneToOne
-	@JoinColumn(name = "idEditorial")
+	
+	
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="editorial_id", nullable=false)
 	private Editorial editorial;
+	
 	
 	private String imagen="no-image.png";
 	
