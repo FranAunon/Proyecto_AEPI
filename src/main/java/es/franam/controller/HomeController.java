@@ -16,8 +16,6 @@ import es.franam.service.IEditorialService;
 @Controller
 public class HomeController {
 
-	
-
 	@Autowired
 	private IEditorialService editorialService;
 	

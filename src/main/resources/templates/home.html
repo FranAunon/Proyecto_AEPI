@@ -49,14 +49,14 @@
         <hr>
         <div class="row" th:each="book : ${books}">
           <div class="col-md-3">            
-            <img class="rounded mx-auto d-block" th:src="@{/images/{img} (img=${book.imagen})}" alt="Generic placeholder image" width="220" height="220">            
+            <img class="rounded mx-auto d-block" th:src="@{/logos/{img} (img=${book.imagen})}" alt="Generic placeholder image" width="220" height="220">            
           </div>
           <div class="col-md-9">
             <h2 th:text="${book.title}"></h2>
             <h6 class="card-title"><strong>Autor: </strong> <span th:text="${book.author}"></span></h6>
-            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${book.publishedDate}"></span></h6>                
-            <p th:text="${book.editorial.name}" ></p>
-            <p><a class="btn btn-secondary" TH:href="@{/books/view/{id} (id=${book.id})  }" role="button">Detalles &raquo;</a></p>            
+            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${book.publishedDate}"></span></h6>
+            <h6 class="card-title"><strong>Editorial: </strong> <span th:text="${book.editorial.name}"></span></h6>                  
+             <p><a class="btn btn-secondary" TH:href="@{/books/view/{id} (id=${book.id})  }" role="button">Detalles &raquo;</a></p>            
           </div>
         </div>  
                     
