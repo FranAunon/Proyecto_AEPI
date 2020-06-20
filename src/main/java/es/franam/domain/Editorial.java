@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.Length;
 public class Editorial implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = SEQUENCE, generator = "EDITORIAL_ID_SEQ")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
 	@Version
@@ -102,8 +102,7 @@ public class Editorial implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Editorial [id=" + id + ", version=" + version + ", name=" + name + ", address=" + address + ", books="
-				+ books + "]";
+		return "Editorial [id=" + id + ", version=" + version + ", name=" + name + ", address=" + address + "]";
 	}
 
 	

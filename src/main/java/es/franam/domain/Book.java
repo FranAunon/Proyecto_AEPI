@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -54,7 +55,7 @@ public class Book implements Serializable {
 	private Date publishedDate;
 	
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
 	@JoinColumn(name="editorial_id", nullable=false)
 	private Editorial editorial;
 	
@@ -162,7 +163,7 @@ public class Book implements Serializable {
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", version=" + version + ", title=" + title + ", ISBN=" + ISBN + ", price=" + price
-				+ ", author=" + author + ", publishedDate=" + publishedDate + ", editorial=" + editorial + ", imagen="
+				+ ", author=" + author + ", publishedDate=" + publishedDate + ", editorial=" + editorial.getName() + ", imagen="
 				+ imagen + ", destacado=" + destacado + ", descripcion=" + descripcion + "]";
 	}
 	

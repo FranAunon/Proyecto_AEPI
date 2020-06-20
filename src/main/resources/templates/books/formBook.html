@@ -54,7 +54,7 @@
                 <div class="col-md-3"> 
                   <div class="form-group">
                     <label for="editorial">Editorial</label>
-                    <select class="form-control" th:field="*{editorial.id}">
+                    <select class="form-control" th:field="*{editorial}">
                       <option th:each="editorial : ${editoriales}" 
 		                      th:value="${editorial.id}" 
 		                      th:text="${editorial.name}"></option>                     

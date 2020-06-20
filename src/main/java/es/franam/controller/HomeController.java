@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import es.franam.domain.Book;
 import es.franam.domain.Editorial;
@@ -23,16 +24,17 @@ public class HomeController {
 	@Autowired
 	private IBookService bookService;
 	
-//	@GetMapping("/")
-//	public String mostrarHome(Model model) {
-//		return "home";
-//	}	
-	
+
 	@GetMapping("/")
 	public String showHome(Model model) {
-		List<Book> books = bookService.buscarTodos();
-		model.addAttribute("books", books);
+//		List<Book> books = bookService.buscarTodos();
+//		model.addAttribute("books", books);
 		return "home";
+	}
+	
+	@ModelAttribute
+	public void setGenericos(Model model) {
+		model.addAttribute("books", bookService.buscarStock());
 	}
 	
 	@GetMapping("/tabla")

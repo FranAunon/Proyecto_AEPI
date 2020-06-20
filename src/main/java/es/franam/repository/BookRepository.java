@@ -11,6 +11,6 @@ import es.franam.domain.Book;
 public interface BookRepository extends JpaRepository<Book, Integer> {
 
 	List<Book> findAllByTitle(String title);
-	
+	List<Book> findByDestacado(Integer destacado);
 	
 }

@@ -9,5 +9,5 @@ public interface IBookService {
 	List<Book> buscarTodos();
 	Book buscarPorId(Integer id);
 	void guardar(Book book);
-	
+	List<Book> buscarStock();
 }
