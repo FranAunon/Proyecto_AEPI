@@ -10,4 +10,5 @@ public interface IBookService {
 	Book buscarPorId(Integer id);
 	void guardar(Book book);
 	List<Book> buscarStock();
+	void eliminar(Integer idBook);
 }

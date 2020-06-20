@@ -53,6 +53,12 @@ public class BookServiceImpl implements IBookService {
 		return bookRepository.findByDestacado(1);
 	}
 
+	@Override
+	public void eliminar(Integer idBook) {
+		// TODO Auto-generated method stub
+		bookRepository.deleteById(idBook);
+	}
+
 	
 	
 }

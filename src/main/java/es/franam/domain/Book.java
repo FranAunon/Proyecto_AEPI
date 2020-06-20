@@ -55,7 +55,7 @@ public class Book implements Serializable {
 	private Date publishedDate;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="editorial_id", nullable=false)
 	private Editorial editorial;
 	

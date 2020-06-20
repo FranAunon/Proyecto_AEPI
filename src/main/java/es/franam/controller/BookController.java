@@ -93,6 +93,14 @@ public class BookController {
 		
 		return "redirect:/books/index";
 	}
+	
+	@GetMapping("/delete/{id}")
+	public String eliminar(@PathVariable("id") int idBook, RedirectAttributes attributes) {
+		bookService.eliminar(idBook);
+		attributes.addFlashAttribute("msg", "El libro fue eliminado");
+		return "redirect:/books/index";
+	}
+	
 
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
