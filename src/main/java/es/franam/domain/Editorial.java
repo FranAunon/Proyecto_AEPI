@@ -19,7 +19,7 @@ import javax.persistence.Version;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "editorial")
+@Table(name = "Editoriales")
 public class Editorial implements Serializable {
 
 	@Id
@@ -35,9 +35,9 @@ public class Editorial implements Serializable {
 	@Length(min = 2, max = 50)
 	private String address;
 
-	@OneToMany(mappedBy = "editorial")
-	@OrderBy("date asc, id desc")
-	Set<Book> books = new HashSet<>();
+//	@OneToMany(mappedBy = "editorial")
+//	@OrderBy("date asc, id desc")
+//	Set<Book> books = new HashSet<>();
 
 	/*
 	 * @OneToOne
@@ -57,19 +57,6 @@ public class Editorial implements Serializable {
 	}
 
 	
-
-	public Set<Book> getBooks() {
-		return books;
-	}
-
-
-
-	public void setBooks(Set<Book> books) {
-		this.books = books;
-	}
-
-
-
 	public void setId(Integer id) {
 		this.id = id;
 	}

@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Table(name = "book")
+@Table(name = "Books")
 public class Book implements Serializable {
 
 	@Id
@@ -56,8 +56,8 @@ public class Book implements Serializable {
 	private Date publishedDate;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="editorial_id", nullable=false)
+	@ManyToOne
+	@JoinColumn(name="idEditorial")
 	private Editorial editorial;
 	
 	
