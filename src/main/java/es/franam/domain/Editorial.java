@@ -19,7 +19,7 @@ import javax.persistence.Version;
 import org.hibernate.validator.constraints.Length;
 
 @Entity
-@Table(name = "Editoriales")
+@Table(name = "editoriales")
 public class Editorial implements Serializable {
 
 	@Id

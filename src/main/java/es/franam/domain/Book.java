@@ -24,7 +24,7 @@ import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 
 @Entity
-@Table(name = "Books")
+@Table(name = "books")
 public class Book implements Serializable {
 
 	@Id
