@@ -8,6 +8,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -92,7 +94,7 @@ public class BookController {
 		
 		System.out.println(book);
 		
-		return "redirect:/books/index";
+		return "redirect:/books/indexPaginate";
 	}
 	
 	
@@ -118,6 +120,13 @@ public class BookController {
 	@ModelAttribute
 	public void setGenericos(Model model) {
 		model.addAttribute("editoriales", editorialesService.buscarTodas() );
+	}
+	
+	@GetMapping(value = "/indexPaginate")
+	public String mostrarIndexPaginado(Model model, Pageable page) {
+		Page<Book>lista = bookService.buscarTodos(page);
+		model.addAttribute("books", lista);
+		return "books/listBooks";
 	}
 	
 	@InitBinder

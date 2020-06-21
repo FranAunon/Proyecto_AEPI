@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.franam.domain.Book;
@@ -64,6 +66,12 @@ public class BookServiceImpl implements IBookService {
 	public List<Book> buscarByExample(Example<Book> example) {
 		// TODO Auto-generated method stub
 		return bookRepository.findAll(example);
+	}
+
+	@Override
+	public Page<Book> buscarTodos(Pageable page) {
+		// TODO Auto-generated method stub
+		return bookRepository.findAll(page);
 	}
 
 

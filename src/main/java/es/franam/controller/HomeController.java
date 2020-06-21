@@ -110,6 +110,8 @@ public class HomeController {
 		model.addAttribute("books", lista);
 		return "home";
 	}
+	
+	
 
 	// settea los string vacios a null
 	@InitBinder
