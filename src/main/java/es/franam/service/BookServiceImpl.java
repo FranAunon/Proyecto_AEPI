@@ -10,6 +10,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import es.franam.domain.Book;
@@ -58,6 +59,13 @@ public class BookServiceImpl implements IBookService {
 		// TODO Auto-generated method stub
 		bookRepository.deleteById(idBook);
 	}
+
+	@Override
+	public List<Book> buscarByExample(Example<Book> example) {
+		// TODO Auto-generated method stub
+		return bookRepository.findAll(example);
+	}
+
 
 	
 	

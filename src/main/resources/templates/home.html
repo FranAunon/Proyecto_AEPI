@@ -27,17 +27,18 @@
       <div class="jumbotron">
         <div class="container">
           <h3>Encuentra el libro que estas buscando.</h3>
-          Puedes buscar por descripción y categoría.
-          <form class="form-inline">
-            <input type="text" class="form-control mb-3" id="exampleFormControlInput1" placeholder="Escriba una búsqueda">&nbsp;
-            <select class="custom-select custom-select mb-3">
-              <option selected>Seleccione un nombre</option>
-              <option value="1">Ventas</option>
-              <option value="2">Contabilidad</option>
-              <option value="3">Transporte</option>
-              <option value="4">Informática</option>
-              <option value="5">Construcción</option>
+          Puedes buscar por titulo y editorial.
+          <form class="form-inline" th:action="@{/search}" method="get" th:object="${search}">
+           
+            <input type="text" class="form-control mb-3" th:field="*{title}" th:value="${title}" placeholder="Escriba una búsqueda">&nbsp;
+            <select class="custom-select custom-select mb-3" th:field="*{editorial}">
+              <option th:value="${null}" selected>Seleccione una editorial</option>
+              <option th:each="editorial : ${editoriales}"
+              			th:value="${editorial.id}"
+              			th:text="${editorial.name}"></option>
+              
             </select>&nbsp;
+            
             <button type="submit" class="btn btn-primary mb-3">Buscar</button>
           </form>
         </div>

@@ -15,6 +15,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,8 +61,8 @@ public class BookController {
 
 	@GetMapping("/create")
 	public String crear(Book book,Model model) {
-		model.addAttribute("editoriales", editorialesService.buscarTodas() );
-		System.out.println("pasa");
+		
+		
 		return "books/formBook";
 	}
 
@@ -89,10 +90,14 @@ public class BookController {
 		bookService.guardar(book);
 		attributes.addFlashAttribute("msg", "Registro guardado");
 		
-		System.out.println("Book: "+book);
+		System.out.println(book);
 		
 		return "redirect:/books/index";
 	}
+	
+	
+	
+	
 	
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idBook, RedirectAttributes attributes) {
@@ -101,7 +106,20 @@ public class BookController {
 		return "redirect:/books/index";
 	}
 	
-
+	@GetMapping("/edit/{id}")
+	public String editar(@PathVariable("id") int idBook, Model model) {
+		Book book=bookService.buscarPorId(idBook);
+		
+		model.addAttribute("book", book);
+		
+		return "books/formBook";
+	}
+	
+	@ModelAttribute
+	public void setGenericos(Model model) {
+		model.addAttribute("editoriales", editorialesService.buscarTodas() );
+	}
+	
 	@InitBinder
 	public void initBinder(WebDataBinder webDataBinder) {
 		SimpleDateFormat simpleDateFormat= new SimpleDateFormat("dd-MM-yyyy");

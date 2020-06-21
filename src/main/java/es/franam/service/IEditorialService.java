@@ -9,5 +9,6 @@ import es.franam.domain.Editorial;
 public interface IEditorialService {
 	void guardar(Editorial editorial);
 	List<Editorial> buscarTodas();
-	Editorial buscarPorId(Integer idCategoria);	
+	Editorial buscarPorId(Integer idCategoria);
+	void eliminar(Integer idEditorial);	
 }
