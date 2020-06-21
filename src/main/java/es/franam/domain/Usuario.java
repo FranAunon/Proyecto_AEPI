@@ -20,7 +20,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "usuarios")
+@Table(name = "Usuarios")
 public class Usuario {
 
 	@Id
@@ -32,19 +32,15 @@ public class Usuario {
 	private String password;
 	private Integer estatus;	
 	private Date fechaRegistro;
-	@ManyToMany(fetch=FetchType.EAGER)
-	@JoinTable(name="usuario_perfil",
-			   joinColumns = @JoinColumn(name="id_usuario"),
-			   inverseJoinColumns = @JoinColumn(name="id_perfil")			
-			)
+
+	// Relacion ManyToMany (Un usuario tiene muchos perfiles)
+	// Por defecto Fetch es FetchType.LAZY
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "UsuarioPerfil", // tabla intermedia
+			joinColumns = @JoinColumn(name = "idUsuario"), // foreignKey en la tabla de UsuarioPerfil
+			inverseJoinColumns = @JoinColumn(name = "idPerfil") // foreignKey en la tabla de UsuarioPerfil
+	)
 	private List<Perfil> perfiles;
-	
-	public void agregar(Perfil tempPerfil) {
-		if (perfiles == null) {
-			perfiles = new LinkedList<Perfil>();
-		}
-		perfiles.add(tempPerfil);
-	}
 
 	public Integer getId() {
 		return id;
@@ -101,7 +97,6 @@ public class Usuario {
 	public void setFechaRegistro(Date fechaRegistro) {
 		this.fechaRegistro = fechaRegistro;
 	}
-		
 
 	public List<Perfil> getPerfiles() {
 		return perfiles;
@@ -110,11 +105,20 @@ public class Usuario {
 	public void setPerfiles(List<Perfil> perfiles) {
 		this.perfiles = perfiles;
 	}
+	
+	// Metodo para agregar perfiles
+	public void agregar(Perfil tempPerfil) {
+		if (perfiles == null) {
+			perfiles = new LinkedList<>();
+		}
+		perfiles.add(tempPerfil);
+	}
 
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", username=" + username + ", nombre=" + nombre + ", email=" + email
-				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + "]";
+				+ ", password=" + password + ", estatus=" + estatus + ", fechaRegistro=" + fechaRegistro + ", perfiles="
+				+ perfiles + "]";
 	}
 	
 }

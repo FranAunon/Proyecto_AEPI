@@ -20,8 +20,6 @@ CREATE TABLE `Usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
-
-
 DROP TABLE IF EXISTS `UsuarioPerfil`;
 CREATE TABLE `UsuarioPerfil` (
   `idUsuario` int NOT NULL,
