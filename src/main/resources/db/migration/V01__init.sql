@@ -45,7 +45,7 @@ CREATE TABLE `Books` (
   `detalles` text,
   `idEditorial` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_books_editorial1_idx` (`idEditorial`),
+  KEY `fk_books_editoriales1_idx` (`idEditorial`),
   CONSTRAINT `fk_books_editoriales1` FOREIGN KEY (`idEditorial`) REFERENCES `Editoriales` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 

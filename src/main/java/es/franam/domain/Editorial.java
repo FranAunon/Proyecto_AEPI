@@ -1,6 +1,6 @@
 package es.franam.domain;
 
-import static javax.persistence.GenerationType.SEQUENCE;
+
 
 import java.io.Serializable;
 import java.util.HashSet;
