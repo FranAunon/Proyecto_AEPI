@@ -105,7 +105,7 @@ public class BookController {
 	public String eliminar(@PathVariable("id") int idBook, RedirectAttributes attributes) {
 		bookService.eliminar(idBook);
 		attributes.addFlashAttribute("msg", "El libro fue eliminado");
-		return "redirect:/books/index";
+		return "redirect:/books/indexPaginate";
 	}
 	
 	@GetMapping("/edit/{id}")

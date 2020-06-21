@@ -55,7 +55,7 @@
           <div class="col-md-9">
             <h2 th:text="${book.title}"></h2>
             <h6 class="card-title"><strong>Autor: </strong> <span th:text="${book.author}"></span></h6>
-            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${book.publishedDate}"></span></h6>
+            <h6 class="card-title"><strong>Publicado: </strong> <span th:text="${#dates.format(book.publishedDate, 'dd-MM-yyyy')}"></span></h6>
             <h6 class="card-title"><strong>Editorial: </strong> <span th:text="${book.editorial.name}"></span></h6>                  
              <p><a class="btn btn-secondary" TH:href="@{/books/view/{id} (id=${book.id})  }" role="button">Detalles &raquo;</a></p>            
           </div>

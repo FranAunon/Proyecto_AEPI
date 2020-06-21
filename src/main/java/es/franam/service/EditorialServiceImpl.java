@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.franam.domain.Editorial;
@@ -43,6 +45,12 @@ public class EditorialServiceImpl implements IEditorialService {
 	@Override
 	public void eliminar(Integer idEditorial) {
 		editorialRepository.deleteById(idEditorial);
+	}
+
+	@Override
+	public Page<Editorial> buscarTodos(Pageable page) {
+		// TODO Auto-generated method stub
+		return editorialRepository.findAll(page);
 	}
 
 
