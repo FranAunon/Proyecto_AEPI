@@ -71,7 +71,7 @@ public class BookController {
 	@PostMapping("/save")
 	public String guardar(Book book, BindingResult result, RedirectAttributes attributes,@RequestParam("archivoImagen") MultipartFile multiPart ) {
 		
-		System.out.println(book);
+		//System.out.println(book);
 		if(result.hasErrors()) {
 			for(ObjectError error: result.getAllErrors()) {
 				System.out.println("Ocurrio un error: "+error.getDefaultMessage());
@@ -92,7 +92,7 @@ public class BookController {
 		bookService.guardar(book);
 		attributes.addFlashAttribute("msg", "Registro guardado");
 		
-		System.out.println(book);
+		//System.out.println(book);
 		
 		return "redirect:/books/indexPaginate";
 	}

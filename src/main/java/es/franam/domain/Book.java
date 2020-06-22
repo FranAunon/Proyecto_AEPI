@@ -57,7 +57,7 @@ public class Book implements Serializable {
 	
 	
 	@ManyToOne
-	@JoinColumn(name="idEditorial")
+	@JoinColumn(name="id_editorial")
 	private Editorial editorial;
 	
 	

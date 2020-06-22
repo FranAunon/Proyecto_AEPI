@@ -24,7 +24,7 @@ CREATE TABLE `usuarios` (
   `username` varchar(45) NOT NULL,
   `password` varchar(100) NOT NULL,
   `estatus` int NOT NULL DEFAULT '1',
-  `fechaRegistro` date DEFAULT NULL,
+  `fecha_registro` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)
@@ -43,10 +43,10 @@ CREATE TABLE `books` (
   `title` varchar(30) DEFAULT NULL,
   `version` bigint DEFAULT NULL,
   `detalles` text,
-  `idEditorial` int NOT NULL,
+  `id_editorial` int NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_books_editoriales1_idx` (`idEditorial`),
-  CONSTRAINT `fk_books_editoriales1` FOREIGN KEY (`idEditorial`) REFERENCES `editoriales` (`id`)
+  KEY `fk_books_editoriales1_idx` (`id_editorial`),
+  CONSTRAINT `fk_books_editoriales1` FOREIGN KEY (`id_editorial`) REFERENCES `editoriales` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `solicitudes`;
@@ -55,23 +55,23 @@ CREATE TABLE `solicitudes` (
   `fecha` date NOT NULL,
   `archivo` varchar(250) NOT NULL,
   `comentarios` text,
-  `idBook` int NOT NULL,
-  `idUsuario` int NOT NULL,
+  `id_book` int NOT NULL,
+  `id_usuario` int NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `book_usuario_UNIQUE` (`idBook`,`idUsuario`),
-  KEY `fk_solicitudes_books1_idx` (`idBook`),
-  KEY `fk_solicitudes_usuarios1_idx` (`idUsuario`),
-  CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `fk_solicitudes_books1` FOREIGN KEY (`idBook`) REFERENCES `books` (`id`)
+  UNIQUE KEY `book_usuario_UNIQUE` (`id_book`,`id_usuario`),
+  KEY `fk_solicitudes_books1_idx` (`id_book`),
+  KEY `fk_solicitudes_usuarios1_idx` (`id_usuario`),
+  CONSTRAINT `fk_solicitudes_usuarios1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `fk_solicitudes_books1` FOREIGN KEY (`id_book`) REFERENCES `books` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 DROP TABLE IF EXISTS `usuario_perfil`;
 CREATE TABLE `usuario_perfil` (
-  `idUsuario` int NOT NULL,
-  `idPerfil` int NOT NULL,
-  UNIQUE KEY `usuario_perfil_UNIQUE` (`idUsuario`,`idPerfil`),
-  KEY `fk_usuarios1_idx` (`idUsuario`),
-  KEY `fk_perfiles1_idx` (`idPerfil`),
-  CONSTRAINT `fk_usuarios1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`id`),
-  CONSTRAINT `fk_perfiles1` FOREIGN KEY (`idPerfil`) REFERENCES `perfiles` (`id`)
+  `id_usuario` int NOT NULL,
+  `id_perfil` int NOT NULL,
+  UNIQUE KEY `usuario_perfil_UNIQUE` (`id_usuario`,`id_perfil`),
+  KEY `fk_usuarios1_idx` (`id_usuario`),
+  KEY `fk_perfiles1_idx` (`id_perfil`),
+  CONSTRAINT `fk_usuarios1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id`),
+  CONSTRAINT `fk_perfiles1` FOREIGN KEY (`id_perfil`) REFERENCES `perfiles` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
