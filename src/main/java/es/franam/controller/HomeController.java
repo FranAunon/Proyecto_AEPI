@@ -4,11 +4,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
@@ -45,6 +49,25 @@ public class HomeController {
 		// model.addAttribute("editoriales", editorialService.buscarTodas());
 
 		return "home";
+	}
+	
+	@GetMapping("/index")
+	public String mostrarIndex(Authentication authentication, HttpSession session) {		
+		
+		// Como el usuario ya ingreso, ya podemos agregar a la session el objeto usuario.
+		String username = authentication.getName();		
+		
+		for(GrantedAuthority rol: authentication.getAuthorities()) {
+			System.out.println("ROL: " + rol.getAuthority());
+		}
+		
+		if (session.getAttribute("usuario") == null){
+			Usuario usuario = serviceUsuarios.buscarPorUsername(username);	
+			//System.out.println("Usuario: " + usuario);
+			session.setAttribute("usuario", usuario);
+		}
+		
+		return "redirect:/";
 	}
 
 	@ModelAttribute

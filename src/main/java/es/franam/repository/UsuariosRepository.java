@@ -6,6 +6,6 @@ import es.franam.domain.Usuario;
 
 
 public interface UsuariosRepository extends JpaRepository<Usuario, Integer> {
-
+	Usuario findByUsername(String username);
 }
 

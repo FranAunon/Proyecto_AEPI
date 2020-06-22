@@ -25,4 +25,10 @@ public class UsuariosService implements IUsuariosService {
 		return usuariosRepo.findAll();
 	}
 
+	@Override
+	public Usuario buscarPorUsername(String username) {
+		// TODO Auto-generated method stub
+		return usuariosRepo.findByUsername(username);
+	}
+
 }
