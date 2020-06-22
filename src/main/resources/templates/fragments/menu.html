@@ -17,8 +17,10 @@
 	  </li>
            
     </ul>  
-    <a class="btn btn-primary" th:href="@{/index}">Ingresar</a>&nbsp;
-    <a class="btn btn-primary" th:href="@{/signup}">Registrarse</a>&nbsp;
+   <div sec:authorize="isAnonymous()">
+		<a class="btn btn-primary" th:href="@{/index}">Ingresar</a>&nbsp;
+		<a class="btn btn-primary" th:href="@{/signup}">Registrarse</a>
+	</div>&nbsp;
     <span class="text-light">Bienvenido</span>&nbsp;<span class="text-light" sec:authentication="name"></span>&nbsp;
     <a class="btn btn-primary" th:href="@{/logout}">Salir</a>
   </div>
