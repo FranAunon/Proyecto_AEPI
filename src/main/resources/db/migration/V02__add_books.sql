@@ -31,7 +31,12 @@ INSERT INTO `users` VALUES ('marisol','{noop}mari123',1);
 INSERT INTO `authorities` VALUES ('luis','SUPERVISOR');
 INSERT INTO `authorities` VALUES ('marisol','ADMINISTRADOR');
 
+INSERT INTO `usuarios` VALUES (2,'Luis Esparza Gomez','luis@itinajero.net','luis','{noop}luis123',1,'2019-06-10');
+INSERT INTO `usuarios` VALUES (3,'Marisol Salinas Rodarte','marisol@itinajero.net','marisol','{noop}mari123',1,'2019-06-10');
 
+
+INSERT INTO `usuario_perfil` VALUES (2, 1); -- PERFIL SUPERVISOR
+INSERT INTO `usuario_perfil` VALUES (3, 2); -- PERFIL ADMINISTRADOR
 
 
 
