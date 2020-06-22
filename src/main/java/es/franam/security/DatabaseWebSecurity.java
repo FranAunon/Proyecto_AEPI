@@ -17,6 +17,8 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,6 +47,7 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
         .antMatchers("/", 
         			 "/signup",
         			 "/search",
+        			 "/bcrypt/**",
         			 "/books/view/**").permitAll()
         
         .antMatchers("/books/**").hasAnyAuthority("SUPERVISOR","ADMINISTRADOR")
@@ -57,7 +60,10 @@ public class DatabaseWebSecurity extends WebSecurityConfigurerAdapter {
         .and().formLogin().permitAll();
     }
 	
-
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+	    return new BCryptPasswordEncoder();
+	}
 
 
 }
