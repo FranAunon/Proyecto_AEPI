@@ -23,6 +23,14 @@ INSERT INTO db_proyecto.books (isbn,author,descripcion,destacado,imagen,price,pu
 ;
 
 
+-- Insertamos nuestros usuarios
+INSERT INTO `users` VALUES ('luis','{noop}luis123',1);
+INSERT INTO `users` VALUES ('marisol','{noop}mari123',1);
+
+-- Insertamos (asignamos roles) a nuestros usuarios.
+INSERT INTO `authorities` VALUES ('luis','SUPERVISOR');
+INSERT INTO `authorities` VALUES ('marisol','ADMINISTRADOR');
+
 
 
 
