@@ -44,7 +44,7 @@ public class EditorialesController {
 			return "editoriales/formEditorial";
 		}	
 		
-		// Guadamos el objeto categoria en la bd
+		
 		System.out.println(editorial);
 		editorialService.guardar(editorial);
 		attributes.addFlashAttribute("msg", "Los datos de la categoría fueron guardados!");		
@@ -60,7 +60,7 @@ public class EditorialesController {
 	
 	@GetMapping("/delete/{id}")
 	public String eliminar(@PathVariable("id") int idEditorial, RedirectAttributes attributes) {		
-		// Eliminamos la categoria.
+		
 		editorialService.eliminar(idEditorial);			
 		attributes.addFlashAttribute("msg", "La editorial fue eliminada!.");
 		return "redirect:/editoriales/indexPaginate";

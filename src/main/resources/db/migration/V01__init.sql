@@ -53,7 +53,6 @@ DROP TABLE IF EXISTS `solicitudes`;
 CREATE TABLE `solicitudes` (
   `id` int NOT NULL AUTO_INCREMENT,
   `fecha` date NOT NULL,
-  `archivo` varchar(250) NOT NULL,
   `comentarios` text,
   `id_book` int NOT NULL,
   `id_usuario` int NOT NULL,

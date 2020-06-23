@@ -167,6 +167,13 @@ public class Book implements Serializable {
 				+ ", author=" + author + ", publishedDate=" + publishedDate + ", editorial=" + editorial.getName() + ", imagen="
 				+ imagen + ", destacado=" + destacado + ", descripcion=" + descripcion + "]";
 	}
+
+	
+		public void reset() {
+			this.imagen=null;
+		}
+		
+	
 	
 
 

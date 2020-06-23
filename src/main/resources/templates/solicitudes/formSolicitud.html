@@ -28,7 +28,7 @@
           </div>
           <div class="col-md-9">
             <div class="card">
-              <h4 class="card-header"><strong>Aplicar para el libro <span th:text="${book.nombre}"></span></strong></h4>              
+              <h4 class="card-header"><strong>Aplicar para el libro: <span th:text="${book.title}"></span></strong></h4>              
               <div class="card-body">
                 <h5 class="card-title"><strong>Editorial: </strong><span th:text="${book.editorial.name}"></span></h5>
                 <h6 class="card-title"><strong>Publicado: </strong><span th:text="${#dates.format(book.publishedDate, 'dd-MM-yyyy')}"></span></h6>
@@ -44,13 +44,7 @@
                         <textarea class="form-control" name="comentarios" th:field="*{comentarios}" id="comentarios" rows="2"></textarea>
                       </div> 
                     </div> 
-                    <div class="col-md-6"> 
-                      <div class="form-group">
-                        <label for="archivoCV">Curriculm Vitae</label>
-                        <input type="file" class="form-control-file" name="archivoCV" id="archivoCV" required="true">
-                        <p class="help-block">Solo se permiten archivos [ pdf,doc,docx ]</p>
-                      </div>
-                    </div>
+                   
                   </div> 
                   <hr>
                   <button type="submit" class="btn btn-primary">Enviar</button>  

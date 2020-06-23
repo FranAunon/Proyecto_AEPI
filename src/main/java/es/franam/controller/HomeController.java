@@ -52,9 +52,6 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String showHome(Model model) {
-//		List<Book> books = bookService.buscarTodos();
-//		model.addAttribute("books", books);
-		// model.addAttribute("editoriales", editorialService.buscarTodas());
 
 		return "home";
 	}
@@ -82,6 +79,7 @@ public class HomeController {
 	@ModelAttribute
 	public void setGenericos(Model model) {
 		Book bookSearch = new Book();
+		bookSearch.reset();
 		model.addAttribute("books", bookService.buscarStock());
 		model.addAttribute("editoriales", editorialService.buscarTodas());
 		model.addAttribute("search", bookSearch);
@@ -154,6 +152,11 @@ public class HomeController {
 	@ResponseBody
 	public String encriptar(@PathVariable("texto") String texto) {
 		return texto + " Encriptado en Bcrypt: " + passwordEncoder.encode(texto);
+	}
+	
+	@GetMapping("/about")
+	public String mostrarAcerca() {			
+		return "acerca";
 	}
 	
 	@GetMapping("/login")

@@ -7,17 +7,25 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class Utilidades {
 
-	public static String guardarArchivo(MultipartFile multiPart, String ruta) {  
+	/**
+	 * Metodo que guarda un archivo atraves de un formulario HTML al disco duro.
+	 * 
+	 * @param multiPart
+	 * @return
+	 */
+	public static String guardarArchivo(MultipartFile multiPart, String ruta) {
 		// Obtenemos el nombre original del archivo.
 		String nombreOriginal = multiPart.getOriginalFilename();
-		nombreOriginal.replace("", "-");
+		// Reemplazamos en el nombre de archivo los espacios por guiones.
 		nombreOriginal = nombreOriginal.replace(" ", "-");
+		// Agregamos al nombre del archivo 8 caracteres aleatorios para evitar
+		// duplicados.
 		String nombreFinal = randomAlphaNumeric(8) + nombreOriginal;
 		try {
 			// Formamos el nombre del archivo para guardarlo en el disco duro.
-			File imageFile = new File(ruta+ nombreFinal);
+			File imageFile = new File(ruta + nombreFinal);
 			System.out.println("Archivo: " + imageFile.getAbsolutePath());
-			//Guardamos fisicamente el archivo en HD.
+			// Guardamos fisicamente el archivo en HD.
 			multiPart.transferTo(imageFile);
 			return nombreFinal;
 		} catch (IOException e) {
@@ -25,9 +33,10 @@ public class Utilidades {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * Metodo para generar una cadena aleatoria de longitud N
+	 * 
 	 * @param count
 	 * @return
 	 */

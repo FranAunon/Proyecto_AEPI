@@ -44,7 +44,8 @@
                     <p class="card-text" th:utext="${book.descripcion}"></p>
                   </div>
                 </div>   
-                <a class="btn btn-primary" href="#" role="button" title="Aplicar Libro"><i class="fas fa-file" aria-hidden="true"></i> Aplicar</a>                            
+                <a sec:authorize="isAuthenticated()" class="btn btn-primary" th:href="@{/solicitudes/create/{id} (id=${book.id}) }" role="button" title="Quiero solicitar este libro."><i class="fas fa-file" aria-hidden="true"></i>Solicitar</a>  
+                                           
               </div>
             </div>  
           </div>
